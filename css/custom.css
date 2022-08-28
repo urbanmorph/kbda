@@ -8,10 +8,10 @@
 
 .bg-img {
     background-image: url("../img/banner.png");
-    background-size: cover;
-    background-position: center 100%;
+    background-size: contain;
+    background-repeat: no-repeat;
     height: 500px;
-    width: auto;
+    width: 100%;
 }
 
 .um-green {
