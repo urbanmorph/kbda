@@ -14,6 +14,11 @@
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/custom.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato|Bayon">
+        <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+        <link
+                rel="stylesheet"
+                href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"
+        />
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -46,48 +51,13 @@
     </div>
   </header>
         <!-- Grand inaguration -->
-        <section class="bg-warning pt-5 pb-3 border-bottom" id="learnmore">
+        <section class="bg-warning pt-5 pb-3 border-bottom">
             <div class="container px-5">
               <div class="row text-justify justify-content-md-center mx-auto my-auto">
-                <div class="text-center mb-3">
-                    <h2  class="titles">Grand Inauguration of</h2>
-                    <h2  class="titles">Karnataka Bicycle Dealers Association</h2>
-                    <h2  class="titles">on 4th September 2022</h2>
-                </div>
-                <div class="row text-justify">
-                    <div class="col-lg-6 text-justify"><h3 class="mb-3">Chief guests</h3>
-                        <ul class="list-unstyled mb-4">
-                            <li class="mb-2">
-                                <i class="bi bi-person-fill text-primary p-2"></i>
-                                Member of Parliament, Bengaluru Central, Shri. PC Mohan
-                            </li>
-                            <li class="mb-2">
-                                <i class="bi bi-person-fill text-primary p-2"></i>
-                                Member of Legislative Assembly, Shivajinagar, Rizwan Arshad
-                            </li>
-                            <li class="mb-2">
-                                <i class="bi bi-person-fill text-primary p-2"></i>
-                                Additional Chief Secretary - GOK & Commissioner - DULT, Manjula V
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6 text-justify"><h3 class="mb-3">Program Schedule</h3>
-                        <ul class="list-unstyled mb-4 text-left">
-                            <li class="mb-2">
-                                <i class="bi bi-bicycle text-primary p-2"></i>
-                                Ride Flag off
-                            </li>
-                            <li class="mb-2">
-                                <i class="bi bi-caret-right-square-fill text-primary p-2"></i>
-                                Unvieling of logo and website
-                            </li>
-                            <li class="mb-2">
-                                <i class="bi bi-vector-pen text-primary p-2"></i>
-                                MoU Signing with Directorate of Urban Land Transport
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+                  <div id="map">
+
+                  </div>
+              </div>
             </div>
         </section>
         <!-- Learn more section-->
@@ -112,6 +82,7 @@
                         The pandemic threw up multiple challenges to the bicycle industry. The retailers were worst affected by the lockdown. On one hand bicycle sales were soaring because of the advantages it offered to society during the COVID wave, on the other hand the stores had to close and not be able to service the need. This created the need for KBDA to resurface, go to the Government of Karnataka and ask to be considered a necessary service. KBDA is an association wich will have <strong style="font-size: 1.2rem">500 bicycle dealers</strong> across the state of Karnataka as members very soon. It aims to future proof the state and take bicycling in the state to the next level.
                     </p>
                 </div>
+            </div>
             </div>
         </section>
 
@@ -238,5 +209,328 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+
+        <script type="module">
+          const businesses_data = [
+            {
+              name: "Abhinandan Cycles - Sultanpet",
+              location: [12.967895507498532, 77.57416326250983],
+            },
+            {
+              name: "Cycle point - Chandra layout",
+              location: [12.959004906266234, 77.52484717116401],
+            },
+            {
+              name: "Everest cycles - Kanakpura road",
+              location: [12.89938921643859, 77.57239572883599],
+            },
+            {
+              name: "Global bicycles - HBR layout",
+              location: [13.023238466759285, 77.62924658650795],
+            },
+            {
+              name: "Jayant cycle - Sultanpet",
+              location: [12.932630127613638, 77.58617628465606],
+            },
+            {
+              name: "Jayant cycle - Jayanagar",
+              location: [12.92215875690098, 77.5857801],
+            },
+            {
+              name: "Jayant cycle - Marathalli",
+              location: [12.958553493047207, 77.70090041534394],
+            },
+            {
+              name: "Jayant cycle - Koramangala",
+              location: [12.93414227125834, 77.63091332275152],
+            },
+            {
+              name: "Presidency cycle - NR road",
+              location: [12.963586312566113, 77.58475546541717],
+            },
+            {
+              name: "RR cycle - Ganganagar",
+              location: [13.024676486821317, 77.58496286931211],
+            },
+            {
+              name: "RR cycle - Madiwala",
+              location: [12.925201787935583, 77.6183522232803],
+            },
+            {
+              name: "Senior cycle shoppee  -Kodigehalli",
+              location: [13.058142896783432, 77.58659458465604],
+            },
+            {
+              name: "Shah bikes - Hebbal",
+              location: [13.068319092064739, 77.592719],
+            },
+            {
+              name: "Shah bikes - Basaveshwaranagar",
+              location: [12.99749254440408, 77.54617061349205],
+            },
+            {
+              name: "Sri laxmi cycle co",
+              location: [12.908043867829646, 77.52117542883602],
+            },
+            {
+              name: "Speedy wheels - Basavangudi",
+              location: [12.937281327685648, 77.57231879999999],
+            },
+            {
+              name: "SLN cycle and sports - Chickabanavara",
+              location: [13.085216779011084, 77.49871311534393],
+            },
+            {
+              name: "NSP cycle mart - Nelamangala",
+              location: [13.099230467812607, 77.39415312883598],
+            },
+            {
+              name: "Bike innovations - Magadi road",
+              location: [12.987698734094591, 77.51459175767197],
+            },
+            {
+              name: "Shah cycle trading co - Chamarapet",
+              location: [12.959128728220751, 77.56628094417991],
+            },
+            {
+              name: "Cycle world - HAL",
+              location: [12.95936729475803, 77.65490765767197],
+            },
+            {
+              name: "Cycle world - Electronic city",
+              location: [12.869860278697015, 77.65285420000002],
+            },
+
+            {
+              "name": "Swastik sales - Sultanpet",
+              "location": [12.967726703516176, 77.57435867489608]
+            },
+            {
+              "name": "Cycling Boutique Inc. - CV Raman Nagar",
+              "location": [12.981981910885228, 77.64507218650779]
+            },
+            {
+              "name": "Flying Wheel(Unisupport) - Rajajinagar",
+              "location": [12.983712881829437, 77.55397395767186]
+            },
+            {
+              "name": "Gurumahimaa Distributor - TR Mills",
+              "location": [12.968253283130492, 77.57344227116407]
+            },
+            {
+              "name": "RR Cycles - Matikere",
+              "location": [13.031458803794035, 77.56049123068743]
+            },
+            {
+              "name": "Mahaveer Trading Corp. - Sultanpet",
+              "location": [12.968082533656014, 77.57708834603116]
+            },
+            {
+              "name": "Purnima cycle house - Sultanpet",
+              "location": [12.969282626839865, 77.5743731330965]
+            },
+            {
+              "name": "Dhanushree cycle mart - Laggeri",
+              "location": [13.004679749852427, 77.52614248465628]
+            },
+            {
+              "name": "RR Cyclces - Marathahalli",
+              "location": [12.957008386198938, 77.70094777671862]
+            },
+            {
+              "name": "Ganesh Cycle stores - BTM layout",
+              "location": [12.917957736917852, 77.60082481892476]
+            },
+            {
+              "name": "C.Natarajan Cycle Co. - Sultanpet",
+              "location": [12.96927485116222, 77.57427956931257]
+            },
+            {
+              "name": "Perfect cycles - Kamanahalli",
+              "location": [13.005830517442792, 77.63605946931256]
+            },
+            {
+              "name": "Amrat cycle trading Co. - Sultanpet",
+              "location": [12.96918581749216, 77.57504006137488]
+            },
+            {
+              "name": "Madras cycle trading Co. - SJP road",
+              "location": [12.964607742999512, 77.58387579999999]
+            },
+            {
+              "name": "RR Cycles - Halasuru",
+              "location": [12.976649469049274, 77.62667146137488]
+            },
+            {
+              "name": "Kuldeep Enterprises - Sultanpet",
+              "location": [12.968329253864283, 77.57397143068745]
+            },
+            {
+              "name": "Cycle World- Neeladiri",
+              "location": [12.843889007957404, 77.64413548650778]
+            },
+            {
+              "name": "Shah cycle trading co. - Sultanpet",
+              "location": [12.967934104198946, 77.57405899999999]
+            },
+            {
+              "name": "Shalibhadra Cycles - Sultanpet",
+              "location": [12.968821791584592, 77.57430307281267]
+            },
+            {
+              "name": "Cycle World - Malleswaram",
+              "location": [13.00860690945857, 77.57127377301558]
+            },
+            {
+              "name": "Sharda cycle stores - Sultanpet",
+              "location": [12.968171193591816, 77.57340445767186]
+            },
+            {
+              "name": "Cycle world - Nagarbhavi",
+              "location": [12.969747406449457, 77.50657192883592]
+            },
+            {
+              "name": "Pedals n tandem - Indiranagar",
+              "location": [12.972805455114084, 77.64008400000002]
+            },
+            {
+              "name": "Cycle world - Seegahalli",
+              "location": [13.020136842149846, 77.76231927116406]
+            },
+            {
+              "name": "Cycle world - Bommanahalli",
+              "location": [12.907026866434435, 77.62928761349218]
+            },
+            {
+              "name": "Cycle world - Jigani",
+              "location": [12.78122825597781, 77.63150648650777]
+            },
+            {
+              "name": "Wheel sports - Chamrajpet",
+              "location": [12.95992207763275, 77.56758244417964]
+            },
+            {
+              "name": "Cycle world - Tumkur",
+              "location": [13.331632013498835, 77.12668828650779]
+            },
+            {
+              "name": "Cycle world - Whitefield",
+              "location": [12.956843946476807, 77.74582855767186]
+            },
+            {
+              "name": "Sanghvi agencies - Rajajinagar",
+              "location": [12.982121192269577, 77.55720232883591]
+            },
+            {
+              "name": "Cycle world - Mahadevpura",
+              "location": [12.999144047451031, 77.68832402883591]
+            },
+            {
+              "name": "Cycle world - Kalyan nagar",
+              "location": [13.022563340716589, 77.6486538134922]
+            },
+            {
+              "name": "Sunil sales corporation - Sultanpet",
+              "location": [12.96797082810958, 77.57444645767185]
+            },
+            {
+              "name": "Cycle world - Gandhi bazaar",
+              "location": [12.945906085868797, 77.57107211534372]
+            },
+            {
+              "name": "Cycle world - BG road",
+              "location": [12.882821440384141, 77.5959537]
+            },
+            {
+              "name": "Cycle world - Chandapura",
+              "location": [12.805403891945527, 77.7003465134922]
+            },
+            {
+              "name": "Cycle world - Lingasugur",
+              "location": [16.155239703478344, 76.53059714232813]
+            },
+            {
+              "name": "Cycle world - JP nagar",
+              "location": [12.895115648696716, 77.58144631349221]
+            },
+            {
+              "name": "Usha kids - Malleswaram",
+              "location": [13.02472069226268, 77.55737535582034]
+            },
+            {
+              "name": "Livenup Concepts - Nagarbhavi",
+              "location": [12.973102669879617, 77.51280228650779]
+            },
+            {
+              "name": "Mangaldeep traders - AS Char street",
+              "location": [12.96771320438459, 77.57207417116406]
+            },
+            {
+              "name": "Imperial metal works - AS Char street",
+              "location": [12.971174481166237, 77.576452]
+            },
+            {
+              "name": "Cycle world - KR Puram",
+              "location": [13.017101569091004, 77.70447311349221]
+            },
+            {
+              "name": "Vaishnavi cycle world - RR nagar",
+              "location": [12.934648218915763, 77.5177106]
+            },
+            {
+              "name": "Sri Vidya sharda cycles - Magadi road",
+              "location": [12.977992240951462, 77.54525425767186]
+            },
+            {
+              "name": "Sri Laxmi cycle co. - Katriguppe",
+              "location": [12.933979292870303, 77.55832518650777]
+            }
+          ];
+
+
+          const mapInstance = L.map("map", {
+            center: [12.978519644895517, 77.5732651369921],
+            crs: L.CRS.EPSG3857,
+            zoom: 12,
+            zoomControl: true,
+            preferCanvas: false,
+          });
+          // Add map layer to show the wards and bus stops on
+          var tileLayer = L.tileLayer(
+            // "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+            "https://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+            {
+              attribution:
+                'Data by \u0026copy; \u003ca href="http://openstreetmap.org"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href="http://www.openstreetmap.org/copyright"\u003eODbL\u003c/a\u003e.',
+              detectRetina: false,
+              maxNativeZoom: 18,
+              maxZoom: 18,
+              minZoom: 0,
+              noWrap: false,
+              opacity: 1,
+              subdomains: "abc",
+              tms: false,
+            }
+          ).addTo(mapInstance);
+
+          const redIcon = new L.Icon({
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+            shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowSize: [41, 41]
+          });
+          businesses_data.forEach(b => {
+            const marker = L.marker(b.location, {icon: redIcon});
+            marker.bindTooltip(
+              `<div class="map-marker-tooltip">
+         <h4>${b.name}</h4>
+       </div>`,
+              { sticky: true }
+            );
+            marker.addTo(mapInstance);
+          });
+        </script>
     </body>
 </html>

@@ -67,3 +67,9 @@ header.masthead h1 {
   right: 16px;
   font-size: 8px;
 }
+
+#map {
+    width: 100%;
+    min-height: 460px;
+    border-radius: 4px;
+}
