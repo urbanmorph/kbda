@@ -4,16 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "vite --mode development --host 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "preview": "vite preview",
+    "publish": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/urbanmorph/kbda.git"
+    "url": "git@github.com:urbanmorph/kbda.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/urbanmorph/kbda/issues"
   },
-  "homepage": "https://github.com/urbanmorph/kbda#readme"
+  "homepage": "https://github.com/urbanmorph/kbda#readme",
+  "dependencies": {
+    "gh-pages": "^4.0.0",
+    "sass": "^1.55.0",
+    "vite": "^3.2.2"
+  }
 }
